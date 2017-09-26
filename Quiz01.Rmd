@@ -1,0 +1,20 @@
+---
+title: "Quiz01"
+author: "Maria C. Codlin"
+date: "September 26, 2017"
+output: html_document
+---
+
+```{r}
+library(curl)
+f <- f <- curl("https://raw.githubusercontent.com/fuzzyatelin/fuzzyatelin.github.io/master/AN597_Fall17/zombies.csv")
+d <- read.csv(f, header = TRUE, sep = ",", stringsAsFactors = FALSE)
+head(d)
+```
+
+```{r}
+library(dplyr)
+survivor<- d%>%filter (gender=="Female")%>%
+  select(first_name:last_name)%>%
+  print
+```
