@@ -18,3 +18,38 @@ survivor<- d%>%filter (gender=="Female")%>%
   select(first_name:last_name)%>%
   print
 ```
+# Quiz 2
+
+```{r}
+library(dplyr)
+s<- d%>%filter (gender=="Female")%>%
+  select(first_name:zombies_killed)%>%
+  head()
+```
+
+```{r}
+tall<-filter(s, height>=65)
+short<-filter(s, height<65)
+head(tall)
+```
+```{r}
+par(mfrow = c(1, 2))
+boxplot(tall$zombies_killed, xlab="5.5ft or taller", main="zombies killed by tall women")
+boxplot(short$zombies_killed, xlab="shorter than 5.5ft", main="zombies killed by short women")
+```
+I realise why this one isnt the best now - they are on different scales. 
+
+
+Trying again for single graph
+```{r}
+library(dplyr)
+s<- d%>%filter (gender=="Female")%>%
+  select(first_name:zombies_killed)%>%
+  head()
+```
+Didnt figure it out. 
+```{r} 
+sh<-mutate(s, height2=height)
+head(sh)
+levels(sh)
+```
