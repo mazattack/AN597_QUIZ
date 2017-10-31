@@ -1,0 +1,37 @@
+---
+title: "Quiz03"
+author: "Maria C. Codlin"
+date: "October 31, 2017"
+output: html_document
+---
+I couldn't find my last quiz in the repository. I certainly did it though!
+```{r}
+library(curl)
+f <- f <- curl("https://raw.githubusercontent.com/fuzzyatelin/fuzzyatelin.github.io/master/AN597_Fall17/zombies.csv")
+d <- read.csv(f, header = TRUE, sep = ",", stringsAsFactors = FALSE)
+head(d)
+```
+
+```{r}
+library(dplyr)
+survivor<- d%>%filter (major=="medicine/nursing")%>%
+  print
+```
+```{r}
+m <- lm(data = d, years_of_education ~ age)
+summary (m)
+```
+
+The linear model shows that for nursing/med majors, there is a small .3% positive relationship between age and years of education and that this is significant at 95% confidence level. But this effect seems very small and not likely a very useful relationship.
+
+```{r}
+library (ggplot2)
+d$gender<- as.factor(d$gender)
+g <- ggplot(data = d, aes(x = age, y = years_of_education))
+g <- g + geom_point(aes(color=factor(gender)))
+g <- g + scale_color_manual(values=c("blue", "pink")) #not sure why this removes the legend
+g <- g + geom_smooth(method = "lm", formula = y ~ x)
+g
+```
+
+
